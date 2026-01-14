@@ -1,7 +1,13 @@
 
 import { NASAData } from '../types';
 
-const API_KEY = import.meta.env.VITE_NASA_API_KEY;
+// In production (GitHub Pages) fall back to NASA's public DEMO_KEY if no key is provided.
+// Locally, require a real key so you notice misconfiguration early.
+const FALLBACK_KEY = 'DEMO_KEY';
+const API_KEY =
+  import.meta.env.VITE_NASA_API_KEY ||
+  (import.meta.env.MODE === 'production' ? FALLBACK_KEY : '');
+
 const BASE_URL = 'https://api.nasa.gov/planetary/apod';
 
 export const fetchAPOD = async (date: string): Promise<NASAData> => {
