@@ -40,11 +40,9 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ nasaData }) => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        {/* Left Column: Media & NASA Details (7/12) */}
-        <div className="lg:col-span-7 space-y-6">
+    <div className="w-full max-w-4xl mx-auto mt-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div className="space-y-6">
+
           <div className="glass rounded-3xl overflow-hidden shadow-2xl group relative border border-white/10">
             {nasaData.media_type === 'image' ? (
               <img 
@@ -112,44 +110,6 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ nasaData }) => {
                   <i className="fab fa-whatsapp text-[#25D366]"></i>
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Actions (5/12) */}
-        <div className="lg:col-span-5 h-full">
-          <div className="glass p-8 rounded-3xl border-blue-500/20 shadow-[0_0_60px_rgba(59,130,246,0.05)] sticky top-8 space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <i className="fas fa-sparkles text-white text-xl"></i>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Explore This Moment</h3>
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-tight">Inspired by your cosmic birthday</p>
-              </div>
-            </div>
-
-            <div className="space-y-4 text-slate-200 text-sm leading-relaxed">
-              <p>
-                Imagine standing beneath this very sky on the day you were born—
-                the light from these distant objects may have travelled for
-                thousands or millions of years just to arrive in time to share
-                your first sunrise.
-              </p>
-              <p className="text-slate-400 text-xs">
-                This section uses only the information from NASA&apos;s public APOD
-                data. No AI services or external generators are used.
-              </p>
-            </div>
-
-            <div className="pt-4 border-t border-white/5">
-              <button 
-                onClick={() => window.open(nasaData.hdurl || nasaData.url, '_blank')}
-                className="w-full flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl py-4 text-sm font-semibold transition-all group"
-              >
-                <i className="fas fa-expand-arrows-alt group-hover:scale-110 transition-transform"></i>
-                <span>View High-Resolution Original</span>
-              </button>
             </div>
           </div>
         </div>
