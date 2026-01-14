@@ -1,0 +1,5 @@
+{
+  "name": "Cosmic Birthday - NASA APOD Explorer",
+  "description": "Discover what the universe looked like on your birthday using NASA's Astronomy Picture of the Day API, enhanced with AI-powered cosmic readings.",
+  "requestFramePermissions": []
+}
