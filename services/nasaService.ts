@@ -1,11 +1,14 @@
 
 import { NASAData } from '../types';
 
-
-const API_KEY = 'REDACTED_API_KEY'; 
+const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 const BASE_URL = 'https://api.nasa.gov/planetary/apod';
 
 export const fetchAPOD = async (date: string): Promise<NASAData> => {
+  if (!API_KEY) {
+    throw new Error('NASA API key is not configured. Please set VITE_NASA_API_KEY in your .env file.');
+  }
+
   const response = await fetch(`${BASE_URL}?api_key=${API_KEY}&date=${date}`);
   if (!response.ok) {
     const errorData = await response.json();

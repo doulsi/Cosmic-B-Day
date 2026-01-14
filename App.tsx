@@ -2,17 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import StarField from './components/StarField';
 import ResultDisplay from './components/ResultDisplay';
-import { NASAData, CosmicReading, SearchHistory } from './types';
+import { NASAData, SearchHistory } from './types';
 import { fetchAPOD, getValidDate } from './services/nasaService';
-import { generateCosmicReading } from './services/geminiService';
 
 const App: React.FC = () => {
   const [birthDate, setBirthDate] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [nasaData, setNasaData] = useState<NASAData | null>(null);
-  const [reading, setReading] = useState<CosmicReading | null>(null);
-  const [loadingReading, setLoadingReading] = useState<boolean>(false);
   const [history, setHistory] = useState<SearchHistory[]>([]);
 
   // Load history from local storage
@@ -35,7 +32,6 @@ const App: React.FC = () => {
     setLoading(true);
     setError(null);
     setNasaData(null);
-    setReading(null);
 
     try {
       const validDate = getValidDate(targetDate);
@@ -58,11 +54,6 @@ const App: React.FC = () => {
         return updated;
       });
 
-      // Trigger Gemini reading
-      setLoadingReading(true);
-      const cosmicReading = await generateCosmicReading(data, targetDate);
-      setReading(cosmicReading);
-      setLoadingReading(false);
     } catch (err: any) {
       setError(err.message || 'An error occurred while reaching for the stars.');
       setLoading(false);
@@ -160,9 +151,7 @@ const App: React.FC = () => {
       {nasaData && (
         <div id="results-anchor" className="scroll-mt-12">
            <ResultDisplay 
-            nasaData={nasaData} 
-            reading={reading} 
-            loadingReading={loadingReading} 
+            nasaData={nasaData}
           />
         </div>
       )}

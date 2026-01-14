@@ -9,12 +9,6 @@ export interface NASAData {
   url: string;
 }
 
-export interface CosmicReading {
-  message: string;
-  starSign: string;
-  luckyConstellation: string;
-}
-
 export interface SearchHistory {
   id: string;
   date: string;

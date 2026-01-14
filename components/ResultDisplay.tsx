@@ -1,14 +1,12 @@
 
 import React from 'react';
-import { NASAData, CosmicReading } from '../types';
+import { NASAData } from '../types';
 
 interface ResultDisplayProps {
   nasaData: NASAData;
-  reading: CosmicReading | null;
-  loadingReading: boolean;
 }
 
-const ResultDisplay: React.FC<ResultDisplayProps> = ({ nasaData, reading, loadingReading }) => {
+const ResultDisplay: React.FC<ResultDisplayProps> = ({ nasaData }) => {
   const shareUrl = nasaData.hdurl || nasaData.url;
   const shareText = `Check out the universe on my birthday: ${nasaData.title} via NASA APOD! 🚀✨`;
 
@@ -118,75 +116,41 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ nasaData, reading, loadin
           </div>
         </div>
 
-        {/* Right Column: AI Reading (5/12) */}
+        {/* Right Column: Actions (5/12) */}
         <div className="lg:col-span-5 h-full">
-          <div className="glass p-8 rounded-3xl border-blue-500/20 shadow-[0_0_60px_rgba(59,130,246,0.05)] sticky top-8">
-            <div className="flex items-center gap-3 mb-8">
+          <div className="glass p-8 rounded-3xl border-blue-500/20 shadow-[0_0_60px_rgba(59,130,246,0.05)] sticky top-8 space-y-8">
+            <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
                 <i className="fas fa-sparkles text-white text-xl"></i>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Your Astral Reading</h3>
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-tight">AI Generated for your birth date</p>
+                <h3 className="text-xl font-bold text-white">Explore This Moment</h3>
+                <p className="text-xs text-slate-500 font-medium uppercase tracking-tight">Inspired by your cosmic birthday</p>
               </div>
             </div>
 
-            {loadingReading ? (
-              <div className="space-y-6 py-4">
-                <div className="animate-pulse space-y-3">
-                  <div className="h-4 bg-white/5 rounded w-full"></div>
-                  <div className="h-4 bg-white/5 rounded w-5/6"></div>
-                  <div className="h-4 bg-white/5 rounded w-4/6"></div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="h-24 bg-white/5 rounded-2xl animate-pulse"></div>
-                  <div className="h-24 bg-white/5 rounded-2xl animate-pulse"></div>
-                </div>
-              </div>
-            ) : reading ? (
-              <div className="space-y-10">
-                <div className="relative">
-                  <i className="fas fa-quote-left absolute -top-4 -left-2 text-white/5 text-4xl"></i>
-                  <p className="text-xl text-slate-200 font-light italic leading-relaxed relative z-10">
-                    {reading.message}
-                  </p>
-                </div>
+            <div className="space-y-4 text-slate-200 text-sm leading-relaxed">
+              <p>
+                Imagine standing beneath this very sky on the day you were born—
+                the light from these distant objects may have travelled for
+                thousands or millions of years just to arrive in time to share
+                your first sunrise.
+              </p>
+              <p className="text-slate-400 text-xs">
+                This section uses only the information from NASA&apos;s public APOD
+                data. No AI services or external generators are used.
+              </p>
+            </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-blue-900/10 p-5 rounded-2xl border border-blue-500/10 group hover:border-blue-500/30 transition-all">
-                    <div className="flex items-center gap-2 mb-2">
-                      <i className="fas fa-sun text-blue-400 text-xs"></i>
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-black">Zodiac Sign</span>
-                    </div>
-                    <p className="text-2xl font-bold text-white tracking-tight">{reading.starSign}</p>
-                  </div>
-                  <div className="bg-purple-900/10 p-5 rounded-2xl border border-purple-500/10 group hover:border-purple-500/30 transition-all">
-                    <div className="flex items-center gap-2 mb-2">
-                      <i className="fas fa-star text-purple-400 text-xs"></i>
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-purple-400 font-black">Celestial Body</span>
-                    </div>
-                    <p className="text-2xl font-bold text-white tracking-tight">{reading.luckyConstellation}</p>
-                  </div>
-                </div>
-
-                <div className="pt-8 border-t border-white/5">
-                   <button 
-                    onClick={() => window.open(nasaData.hdurl || nasaData.url, '_blank')}
-                    className="w-full flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl py-4 text-sm font-semibold transition-all group"
-                  >
-                    <i className="fas fa-expand-arrows-alt group-hover:scale-110 transition-transform"></i>
-                    <span>View High-Resolution Original</span>
-                  </button>
-                </div>
-              </div>
-            ) : (
-               <div className="text-center py-20">
-                 <div className="w-16 h-16 rounded-full bg-slate-900 flex items-center justify-center mx-auto mb-4 border border-white/5">
-                   <i className="fas fa-meteor text-slate-700 text-2xl animate-pulse"></i>
-                 </div>
-                 <p className="text-slate-500 text-sm italic">The cosmos is deep and silent. Please try another date or refresh.</p>
-               </div>
-            )}
+            <div className="pt-4 border-t border-white/5">
+              <button 
+                onClick={() => window.open(nasaData.hdurl || nasaData.url, '_blank')}
+                className="w-full flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl py-4 text-sm font-semibold transition-all group"
+              >
+                <i className="fas fa-expand-arrows-alt group-hover:scale-110 transition-transform"></i>
+                <span>View High-Resolution Original</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
